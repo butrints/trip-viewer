@@ -33,8 +33,8 @@ export const PLACES = [
   // Practical stops on the inland stretch up to Vlorë
   { id: 't-border', cat: 'transit', seq: 1, name: 'Morinë border crossing', lat: 42.1554, lng: 20.5458,
     desc: 'Kosovo–Albania crossing (Morinë–Vërmicë). Usually quick — keep passports and car green-card insurance ready.' },
-  { id: 't-a1', cat: 'transit', seq: 2, name: 'A1 fuel & coffee stop', lat: 41.7681, lng: 19.8770,
-    desc: 'Rough midpoint on the A1 motorway. Good place to refuel, grab coffee and breakfast.' },
+  { id: 't-a1', cat: 'transit', seq: 2, name: 'NBT Oil — fuel & coffee', lat: 41.860500, lng: 20.005537,
+    desc: 'Fuel and coffee stop on the A1 (Rruga e Kombit), partway between Kukës and Rrëshen.' },
   { id: 't-vlore', cat: 'transit', seq: 3, name: 'Vlorë', lat: 40.4708, lng: 19.4913,
     desc: 'Last big city before the Llogara pass — fuel up, coffee, big supermarkets. The scenery starts right after here.' },
 
