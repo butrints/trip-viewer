@@ -12,7 +12,7 @@ function makeIcon(place, active) {
   const size = big ? 30 : 23;
   return L.divIcon({
     className: '',
-    html: `<div class="pin ${active ? 'pin-active' : ''}" style="--pin:${color};width:${size}px;height:${size}px;font-size:${big ? 13 : 11}px">${label}</div>`,
+    html: `<div class="pin ${active ? 'pin-active' : ''}" style="--pin:${color};font-size:${big ? 13 : 11}px">${label}</div>`,
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
     popupAnchor: [0, -size / 2],
