@@ -167,7 +167,7 @@ export default function Sidebar({ visible, onToggle, selected, onSelect, showRet
               <Swatch color={cat.color} />
               <span className="tname">{cat.label}</span>
               <span className="count">{PLACES.filter(p => p.cat === cat.id).length}</span>
-              <span className="dot" />
+              <span className="dot"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.3l2.3 2.3L9.5 3.6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
             </button>
           ))}
 
@@ -176,7 +176,7 @@ export default function Sidebar({ visible, onToggle, selected, onSelect, showRet
           <button className={`toggle ${showReturn ? 'on' : ''}`} onClick={onToggleReturn} aria-pressed={showReturn}>
             <span className="leg-line dashed" />
             <span className="tname">Return drives (inland)</span>
-            <span className="dot" />
+            <span className="dot"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.3l2.3 2.3L9.5 3.6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
           </button>
           <div className="hint">The inland mountain line is the Sarandë → Gjiri i Lalzit drive and the way home — both take the faster inland highway rather than the slow coast road.</div>
 
