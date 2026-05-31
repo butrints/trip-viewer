@@ -1,0 +1,10 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+# Vite leaves these temp files behind on synced/network filesystems
+vite.config.*.timestamp-*
