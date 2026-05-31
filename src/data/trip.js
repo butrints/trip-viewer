@@ -14,6 +14,7 @@ export const CATEGORIES = [
   { id: 'enroute',  label: 'Scenic stops (1→4)',  color: '#FF9F0A', numbered: true  },
   { id: 'borsh',    label: 'Around Borsh',        color: '#FF3B30', numbered: false },
   { id: 'sarande',  label: 'Around Sarandë',      color: '#5856D6', numbered: false },
+  { id: 'lalzit',   label: 'Around Gjiri i Lalzit', color: '#30B0C7', numbered: false },
 ];
 
 export const CATEGORY_COLOR = Object.fromEntries(CATEGORIES.map(c => [c.id, c.color]));
@@ -24,11 +25,11 @@ export const PLACES = [
   { id: 'p-pristina', cat: 'stops', seq: 1, name: 'Prishtina (start)', lat: 42.6639, lng: 21.1641,
     desc: 'Depart ~5:00–5:30am, Sat 20 June.' },
   { id: 'p-borsh-hotel', cat: 'stops', seq: 2, name: 'White Hotel, Borsh', lat: 40.036463, lng: 19.866561,
-    desc: 'Arrive ~11:00–11:30am, 20 June. Stay until 24 June, 10pm. Road Plazhi Borsh.' },
+    desc: 'Arrive ~11:00–11:30am, 20 June. 4 nights, then check out ~10am on 24 June. Road Plazhi Borsh.' },
   { id: 'p-gold', cat: 'stops', seq: 3, name: 'Gold Apartment, Sarandë', lat: 39.862647, lng: 20.019708,
-    desc: 'Rruga Butrinti. Arrive ~11pm, 24 June. Stay until 26 June, 10pm.' },
+    desc: 'Rruga Butrinti. Arrive ~11am, 24 June. Stay until ~10am, 26 June.' },
   { id: 'p-lalzit', cat: 'stops', seq: 4, name: 'Gjiri i Lalzit (sister’s place)', lat: 41.4926, lng: 19.5481,
-    desc: 'Arrive ~2am, 27 June. Stay one night, then drive home to Prishtina.' },
+    desc: 'Arrive afternoon, 26 June. One night + a full beach day on the 27th, then set off home ~7pm.' },
 
   // Practical stops on the inland stretch up to Vlorë
   { id: 't-border', cat: 'transit', seq: 1, name: 'Morinë border crossing', lat: 42.1554, lng: 20.5458,
@@ -91,6 +92,12 @@ export const PLACES = [
     desc: 'Sea cave on the cliffs near Sarandë — reach it by boat or kayak for a swim.' },
   { id: 's-mango', cat: 'sarande', name: 'Mango Beach', lat: 39.8527, lng: 20.0212,
     desc: 'Small scenic beach and beach club on the north edge of Sarandë.' },
+
+  // Around Gjiri i Lalzit (your sister’s area, near Durrës)
+  { id: 'l-rodon', cat: 'lalzit', name: 'Cape of Rodon (Kepi i Rodonit)', lat: 41.5868, lng: 19.4458,
+    desc: 'Scenic cape ~20 min from the bay — Skanderbeg-era Rodoni Castle ruins, a little church and quiet beaches. Lovely late-afternoon / sunset spot.' },
+  { id: 'l-durres', cat: 'lalzit', name: 'Durrës (amphitheatre & seafront)', lat: 41.3121, lng: 19.4450,
+    desc: 'Albania’s second city ~25 min south — Roman amphitheatre, long seafront promenade and plenty of restaurants.' },
 ];
 
 // Driving legs — each is a list of [lat, lng] waypoints used to draw the route.
@@ -113,10 +120,11 @@ export const LEGS = [
 export const ITINERARY = [
   { when: 'Sat 20', title: 'Prishtina → Borsh', note: 'Leave ~5–5:30am · arrive White Hotel ~11–11:30am. Frozen-goods stop in Himarë ~30 min before.' },
   { when: '20–24', title: 'White Hotel, Borsh', note: 'Beach, castle, waterfall + day trips.' },
-  { when: 'Wed 24 · 10pm', title: 'Borsh → Sarandë', note: '~37 km, ~50 min · arrive Gold Apartment ~11pm.' },
-  { when: '24–26', title: 'Gold Apartment, Sarandë', note: 'Ksamil, Butrint, Blue Eye, Lëkurësi.' },
-  { when: 'Fri 26 · 10pm', title: 'Sarandë → Gjiri i Lalzit', note: '~255 km, ~4h inland · arrive sister’s ~2am. Long night drive.' },
-  { when: 'Sat 27', title: 'Gjiri i Lalzit → Prishtina', note: '~200 km, ~3h home.' },
+  { when: 'Wed 24 · ~10am', title: 'Borsh → Sarandë', note: '~37 km, ~50 min · check out and arrive Gold Apartment late morning.' },
+  { when: '24–26', title: 'Gold Apartment, Sarandë', note: 'Sarandë beaches, Ksamil, Butrint, Blue Eye, Lëkurësi.' },
+  { when: 'Fri 26 · ~10am', title: 'Sarandë → Gjiri i Lalzit', note: '~255 km, ~4h inland (daytime) · maybe Butrint en route · arrive sister’s in the afternoon.' },
+  { when: '26–27', title: 'Gjiri i Lalzit (sister’s)', note: 'One night; full beach day on the 27th.' },
+  { when: 'Sat 27 · ~7pm', title: 'Gjiri i Lalzit → Prishtina', note: 'Set off ~7pm · ~200 km, ~3h · home around 10pm.' },
 ];
 
 // Day-by-day suggested plan. `places` are PLACE ids you can click to fly to.
@@ -124,21 +132,21 @@ export const ITINERARY = [
 // "Today" view offers one-tap navigation to.
 export const DAY_PLAN = [
   { day: 'Sat 20', date: '2026-06-20', stay: 'White Hotel, Borsh', navId: 'p-borsh-hotel',
-    title: 'Arrive Borsh', note: 'Check in, unwind on Borsh Beach, catch the sunset.', places: ['b-beach'] },
+    title: 'Arrive Borsh', note: 'Arrive ~11am after the dawn drive — check in, grab lunch, then a relaxed afternoon on Borsh Beach and the sunset.', places: ['b-beach'] },
   { day: 'Sun 21', date: '2026-06-21', stay: 'White Hotel, Borsh', navId: 'b-castle',
-    title: 'Sopot Castle + Waterfall', note: 'Hike the hilltop fortress; lunch at the waterfall restaurant.', places: ['b-castle','b-waterfall'] },
-  { day: 'Mon 22', date: '2026-06-22', stay: 'White Hotel, Borsh', navId: 'e-porto',
-    title: 'Coast day north', note: 'Porto Palermo Castle → Himarë → Dhërmi / Gjipe beaches.', places: ['e-porto','e-himare','e-dhermi','b-gjipe'] },
+    title: 'Beach day + Sopot Castle', note: 'Beach morning on Borsh; save the climb for cooler hours — Sopot Castle and the waterfall after ~4pm (best light from the fort).', places: ['b-beach','b-castle','b-waterfall'] },
+  { day: 'Mon 22', date: '2026-06-22', stay: 'White Hotel, Borsh', navId: 'e-dhermi',
+    title: 'Beach-hop north', note: 'Beach-hop up the coast — Gjipe, Dhërmi and Jalë through the day; stop at Porto Palermo Castle on the way back after ~4pm.', places: ['b-gjipe','e-dhermi','b-jale','e-porto'] },
   { day: 'Tue 23', date: '2026-06-23', stay: 'White Hotel, Borsh', navId: 'b-qeparo',
-    title: 'Beach + Qeparo', note: 'Lazy beach morning; old stone village of Upper Qeparo.', places: ['b-beach','b-qeparo'] },
-  { day: 'Wed 24', date: '2026-06-24', stay: 'Borsh → Gold Apartment (leave 10pm)', navId: 'p-gold',
-    title: 'Move to Sarandë', note: 'Relax and pack; depart 10pm for the Gold Apartment.', places: ['p-gold'] },
-  { day: 'Thu 25', date: '2026-06-25', stay: 'Gold Apartment, Sarandë', navId: 's-butrint',
-    title: 'Butrint + Ksamil', note: 'UNESCO ruins in the morning, Ksamil islands and beaches after.', places: ['s-butrint','s-ksamil'] },
-  { day: 'Fri 26', date: '2026-06-26', stay: 'Sarandë → Gjiri i Lalzit (leave 10pm)', navId: 's-blueeye',
-    title: 'Blue Eye + Lëkurësi', note: 'Spring in the morning, castle sunset; depart 10pm for Gjiri i Lalzit.', places: ['s-blueeye','s-lekuresi'] },
-  { day: 'Sat 27', date: '2026-06-27', stay: 'Drive home', navId: 'p-pristina',
-    title: 'Back to Prishtina', note: 'Leave your sister’s and drive home (~200 km, ~3h).', places: ['p-pristina'] },
+    title: 'Beach + Qeparo', note: 'Lazy beach day; drive up to Upper Qeparo (old stone village) after ~4pm for the light and views.', places: ['b-beach','b-qeparo'] },
+  { day: 'Wed 24', date: '2026-06-24', stay: 'Gold Apartment, Sarandë', navId: 'p-gold',
+    title: 'Borsh → Sarandë + a beach', note: 'Check out and drive to Sarandë ~10am; settle into the Gold Apartment, then hit a Sarandë beach (Pulëbardha / Mirror) in the afternoon.', places: ['p-gold','s-pulebardha','s-mirror'] },
+  { day: 'Thu 25', date: '2026-06-25', stay: 'Gold Apartment, Sarandë', navId: 's-pulebardha',
+    title: 'Beach day around Sarandë', note: 'A full beach day — take your pick of Pulëbardha, Mirror, Mango or Ksamil. Maybe Blue Eye or a Lëkurësi sunset for a break from the sand.', places: ['s-pulebardha','s-mirror','s-mango','s-ksamil','s-blueeye'] },
+  { day: 'Fri 26', date: '2026-06-26', stay: 'Gold Apartment → Gjiri i Lalzit', navId: 'p-lalzit',
+    title: 'Sarandë → Gjiri i Lalzit', note: 'Leave the Gold Apartment ~10am — maybe Butrint’s ruins first, then the daytime drive north (~4h) to your sister’s at Gjiri i Lalzit. Beach by the bay, and Cape of Rodon for a late-afternoon look.', places: ['s-butrint','p-lalzit','l-rodon'] },
+  { day: 'Sat 27', date: '2026-06-27', stay: 'Gjiri i Lalzit (leave ~7pm)', navId: 'l-rodon',
+    title: 'Full day at Gjiri i Lalzit', note: 'Morning beach by the bay, then Cape of Rodon or Durrës in the afternoon. Set off for Prishtina ~7pm (~200 km, ~3h — home around 10pm).', places: ['p-lalzit','l-rodon','l-durres','p-pristina'] },
 ];
 
 // Look up a place by id (handy for the Today view).
@@ -192,6 +200,8 @@ export const IMG = {
   's-pulebardha': 'https://cdn.sanity.io/images/ojhw1baz/production/710943e3a49f09c1ff772f14ac7a934f59b3d6f9-1000x750.jpg',
   's-mirror': 'https://type1travelling.com/wp-content/uploads/2025/02/mirror-beach-october.jpg',
   's-pellumbave': 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/7a/c6/9d/shpella-e-pellumbave.jpg?w=1200&h=-1&s=1',
+  'l-rodon': 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Kepi_i_Rodonit%2CGjiri_i_Lalezit_-_Durres_Albania_08.jpg/960px-Kepi_i_Rodonit%2CGjiri_i_Lalezit_-_Durres_Albania_08.jpg',
+  'l-durres': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Amfiteatri_i_Durr%C3%ABsit_02.jpg/960px-Amfiteatri_i_Durr%C3%ABsit_02.jpg',
 };
 
 export function gmapsSearch(lat, lng) {

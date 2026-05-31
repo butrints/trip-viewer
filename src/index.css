@@ -317,7 +317,7 @@ button { font-family: inherit; cursor: pointer; }
   .layout { grid-template-columns: 1fr; }
   .panel-toggle { display: inline-flex; }
   .panel {
-    position: absolute; inset: var(--header-h) 0 0 0; z-index: 900;
+    position: absolute; inset: var(--header-h) 0 0 0; z-index: 1200;
     transform: translateX(-100%); transition: transform 0.3s var(--ease-out);
   }
   .panel.open { transform: translateX(0); }

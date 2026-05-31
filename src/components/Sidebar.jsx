@@ -155,10 +155,10 @@ export default function Sidebar({ visible, onToggle, selected, onSelect, showRet
           <div className="legend"><span className="leg-line solid" /> Drive down (Prishtina → Borsh → Sarandë)</div>
           <button className={`toggle ${showReturn ? 'on' : ''}`} onClick={onToggleReturn} aria-pressed={showReturn}>
             <span className="leg-line dashed" />
-            <span className="tname">Return drives (night + home)</span>
+            <span className="tname">Return drives (inland)</span>
             <span className="dot" />
           </button>
-          <div className="hint">The inland mountain line is the Sarandë → Gjiri i Lalzit night drive and the way home — the coast road is too slow at night.</div>
+          <div className="hint">The inland mountain line is the Sarandë → Gjiri i Lalzit drive and the way home — both take the faster inland highway rather than the slow coast road.</div>
 
           {CATEGORIES.map(cat => {
             const items = PLACES.filter(p => p.cat === cat.id);
