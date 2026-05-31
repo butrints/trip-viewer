@@ -2,7 +2,7 @@
 
 export const TRIP = {
   title: 'Albania Road Trip',
-  subtitle: 'Prishtina → Borsh → Sarandë → Gjiri i Lalzit',
+  subtitle: 'Vushtrri → Borsh → Sarandë → Gjiri i Lalzit',
   dates: '20–27 June 2026',
 };
 
@@ -10,6 +10,7 @@ export const TRIP = {
 export const CATEGORIES = [
   { id: 'stops',    label: 'Stops & route',       color: '#1D1D1F', numbered: true  },
   { id: 'transit',  label: 'Practical stops (to Vlorë)', color: '#86868B', numbered: true },
+  { id: 'fuel',     label: 'Fuel stations',        color: '#A2845E', numbered: false },
   { id: 'market',   label: 'Supermarkets',        color: '#34C759', numbered: false },
   { id: 'enroute',  label: 'Scenic stops (1→4)',  color: '#FF9F0A', numbered: true  },
   { id: 'borsh',    label: 'Around Borsh',        color: '#FF3B30', numbered: false },
@@ -22,8 +23,8 @@ export const CATEGORY_COLOR = Object.fromEntries(CATEGORIES.map(c => [c.id, c.co
 // Every pin on the map. `seq` drives the number shown for ordered categories.
 export const PLACES = [
   // Main stops / lodging
-  { id: 'p-pristina', cat: 'stops', seq: 1, name: 'Prishtina (start)', lat: 42.6639, lng: 21.1641,
-    desc: 'Depart ~5:00–5:30am, Sat 20 June.' },
+  { id: 'p-pristina', cat: 'stops', seq: 1, name: 'Vushtrri (start)', lat: 42.826085, lng: 20.972474,
+    desc: 'Home — depart ~5:00–5:30am, Sat 20 June.' },
   { id: 'p-borsh-hotel', cat: 'stops', seq: 2, name: 'White Hotel, Borsh', lat: 40.036463, lng: 19.866561,
     desc: 'Arrive ~11:00–11:30am, 20 June. 4 nights, then check out ~10am on 24 June. Road Plazhi Borsh.' },
   { id: 'p-gold', cat: 'stops', seq: 3, name: 'Gold Apartment, Sarandë', lat: 39.862647, lng: 20.019708,
@@ -42,8 +43,36 @@ export const PLACES = [
   // Supermarkets
   { id: 'm-himare', cat: 'market', name: 'Himarë — Alpha & Big Market', lat: 40.1022, lng: 19.7473,
     desc: '★ Best stop for frozen/chilled goods: ~30 min / 16 km before Borsh, open ~7am–11pm.' },
-  { id: 'm-sarande', cat: 'market', name: 'Sarandë supermarkets', lat: 39.8752, lng: 20.0065,
-    desc: 'Several large markets in the centre / waterfront for your Gold Apartment stay.' },
+  { id: 'm-planet', cat: 'market', name: 'Planet (Sarandë)', lat: 39.864565, lng: 20.016828,
+    desc: 'Closest proper supermarket to the Gold Apartment (~325 m).' },
+  { id: 'm-prima', cat: 'market', name: 'Prima (Sarandë)', lat: 39.867989, lng: 20.015362,
+    desc: 'Supermarket ~700 m from the Gold Apartment.' },
+  { id: 'm-joni', cat: 'market', name: 'Market Joni (Sarandë)', lat: 39.869158, lng: 20.014459,
+    desc: 'Supermarket ~850 m from the apartment, toward the centre.' },
+  { id: 'm-daklesa', cat: 'market', name: 'Supermarket Daklesa (Sarandë)', lat: 39.869850, lng: 20.014440,
+    desc: 'Larger supermarket ~900 m from the apartment.' },
+  { id: 'm-olsi', cat: 'market', name: 'Market Olsi', lat: 40.036081, lng: 19.865155,
+    desc: 'Closest shop to the White Hotel (~130 m) — water, snacks and daily basics.' },
+  { id: 'm-beni', cat: 'market', name: 'Market Beni', lat: 40.038270, lng: 19.863310,
+    desc: 'Small supermarket ~350 m from the hotel.' },
+  { id: 'm-paisje', cat: 'market', name: 'Market Paisje Plazhi', lat: 40.031637, lng: 19.869103,
+    desc: 'Groceries plus beach supplies, ~600 m along the shore.' },
+  { id: 'm-gezimi', cat: 'market', name: 'Market Gëzimi', lat: 40.030454, lng: 19.870234,
+    desc: 'Mini-market ~750 m down the beach road.' },
+
+  // Fuel stations near the two bases
+  { id: 'f-borsh-n', cat: 'fuel', name: 'Petrol station (north of Borsh)', lat: 40.063483, lng: 19.849982,
+    desc: 'Closest fuel ~3 km north toward Qeparo — small/unbranded; handy to top up when passing.' },
+  { id: 'f-lagjini', cat: 'fuel', name: 'Lagjini Oil (south of Borsh)', lat: 39.995569, lng: 19.914710,
+    desc: 'Fuel ~6 km south of Borsh toward Piqeras / Lukovë.' },
+  { id: 'f-gulf', cat: 'fuel', name: 'Gulf — Sarandë', lat: 39.868854, lng: 20.019368,
+    desc: '~700 m from the Gold Apartment.' },
+  { id: 'f-omv', cat: 'fuel', name: 'OMV — Sarandë', lat: 39.869469, lng: 20.018809,
+    desc: '~750 m from the Gold Apartment.' },
+  { id: 'f-kastrati', cat: 'fuel', name: 'Kastrati — Sarandë', lat: 39.870045, lng: 20.028056,
+    desc: '~1 km, east side of Sarandë.' },
+  { id: 'f-bolv', cat: 'fuel', name: 'Bolv Oil (toward Ksamil)', lat: 39.850757, lng: 20.035517,
+    desc: '~2 km south of Sarandë — handy on the way to Ksamil / Butrint.' },
 
   // Scenic stops on the drive down (in driving order)
   { id: 'e-llogara', cat: 'enroute', seq: 1, name: 'Llogara Pass viewpoint', lat: 40.1982, lng: 19.5924,
@@ -102,29 +131,29 @@ export const PLACES = [
 
 // Driving legs — each is a list of [lat, lng] waypoints used to draw the route.
 export const LEGS = [
-  { id: 'leg1', label: 'Prishtina → Borsh (coastal)', km: '~290 km', time: '5.5–6h', kind: 'out',
-    waypoints: [[42.6639,21.1641],[40.4708,19.4913],[40.1982,19.5924],[40.1022,19.7473],[40.036463,19.866561]],
-    gmaps: 'https://www.google.com/maps/dir/?api=1&origin=42.6639,21.1641&destination=40.036463,19.866561&travelmode=driving&waypoints=40.4708,19.4913%7C40.1982,19.5924%7C40.1022,19.7473&dir_action=navigate' },
+  { id: 'leg1', label: 'Vushtrri → Borsh (coastal)', km: '~315 km', time: '~6h', kind: 'out',
+    waypoints: [[42.826085,20.972474],[40.4708,19.4913],[40.1982,19.5924],[40.1022,19.7473],[40.036463,19.866561]],
+    gmaps: 'https://www.google.com/maps/dir/?api=1&origin=42.826085,20.972474&destination=40.036463,19.866561&travelmode=driving&waypoints=40.4708,19.4913%7C40.1982,19.5924%7C40.1022,19.7473&dir_action=navigate' },
   { id: 'leg2', label: 'Borsh → Sarandë', km: '~37 km', time: '~50 min', kind: 'out',
     waypoints: [[40.036463,19.866561],[39.862647,20.019708]],
     gmaps: 'https://www.google.com/maps/dir/?api=1&origin=40.036463,19.866561&destination=39.862647,20.019708&travelmode=driving&dir_action=navigate' },
   { id: 'leg3', label: 'Sarandë → Gjiri i Lalzit', km: '~255 km', time: '~4h', kind: 'return',
     waypoints: [[39.862647,20.019708],[41.4926,19.5481]],
     gmaps: 'https://www.google.com/maps/dir/?api=1&origin=39.862647,20.019708&destination=41.4926,19.5481&travelmode=driving&dir_action=navigate' },
-  { id: 'leg4', label: 'Gjiri i Lalzit → Prishtina', km: '~200 km', time: '~3h', kind: 'return',
-    waypoints: [[41.4926,19.5481],[42.6639,21.1641]],
-    gmaps: 'https://www.google.com/maps/dir/?api=1&origin=41.4926,19.5481&destination=42.6639,21.1641&travelmode=driving&dir_action=navigate' },
+  { id: 'leg4', label: 'Gjiri i Lalzit → Vushtrri', km: '~215 km', time: '~3h', kind: 'return',
+    waypoints: [[41.4926,19.5481],[42.826085,20.972474]],
+    gmaps: 'https://www.google.com/maps/dir/?api=1&origin=41.4926,19.5481&destination=42.826085,20.972474&travelmode=driving&dir_action=navigate' },
 ];
 
 // High-level itinerary rows.
 export const ITINERARY = [
-  { when: 'Sat 20', title: 'Prishtina → Borsh', note: 'Leave ~5–5:30am · arrive White Hotel ~11–11:30am. Frozen-goods stop in Himarë ~30 min before.' },
+  { when: 'Sat 20', title: 'Vushtrri → Borsh', note: 'Leave ~5–5:30am · arrive White Hotel ~11–11:30am. Frozen-goods stop in Himarë ~30 min before.' },
   { when: '20–24', title: 'White Hotel, Borsh', note: 'Beach, castle, waterfall + day trips.' },
   { when: 'Wed 24 · ~10am', title: 'Borsh → Sarandë', note: '~37 km, ~50 min · check out and arrive Gold Apartment late morning.' },
   { when: '24–26', title: 'Gold Apartment, Sarandë', note: 'Sarandë beaches, Ksamil, Butrint, Blue Eye, Lëkurësi.' },
   { when: 'Fri 26 · ~10am', title: 'Sarandë → Gjiri i Lalzit', note: '~255 km, ~4h inland (daytime) · maybe Butrint en route · arrive sister’s in the afternoon.' },
   { when: '26–27', title: 'Gjiri i Lalzit (sister’s)', note: 'One night; full beach day on the 27th.' },
-  { when: 'Sat 27 · ~7pm', title: 'Gjiri i Lalzit → Prishtina', note: 'Set off ~7pm · ~200 km, ~3h · home around 10pm.' },
+  { when: 'Sat 27 · ~7pm', title: 'Gjiri i Lalzit → Vushtrri', note: 'Set off ~7pm · ~215 km, ~3h · home around 10pm.' },
 ];
 
 // Day-by-day suggested plan. `places` are PLACE ids you can click to fly to.
@@ -146,7 +175,7 @@ export const DAY_PLAN = [
   { day: 'Fri 26', date: '2026-06-26', stay: 'Gold Apartment → Gjiri i Lalzit', navId: 'p-lalzit',
     title: 'Sarandë → Gjiri i Lalzit', note: 'Leave the Gold Apartment ~10am — maybe Butrint’s ruins first, then the daytime drive north (~4h) to your sister’s at Gjiri i Lalzit. Beach by the bay, and Cape of Rodon for a late-afternoon look.', places: ['s-butrint','p-lalzit','l-rodon'] },
   { day: 'Sat 27', date: '2026-06-27', stay: 'Gjiri i Lalzit (leave ~7pm)', navId: 'l-rodon',
-    title: 'Full day at Gjiri i Lalzit', note: 'Morning beach by the bay, then Cape of Rodon or Durrës in the afternoon. Set off for Prishtina ~7pm (~200 km, ~3h — home around 10pm).', places: ['p-lalzit','l-rodon','l-durres','p-pristina'] },
+    title: 'Full day at Gjiri i Lalzit', note: 'Morning beach by the bay, then Cape of Rodon or Durrës in the afternoon. Set off for Vushtrri ~7pm (~215 km, ~3h — home around 10pm).', places: ['p-lalzit','l-rodon','l-durres','p-pristina'] },
 ];
 
 // Look up a place by id (handy for the Today view).
@@ -173,7 +202,7 @@ export function getTripStatus(now = new Date()) {
 // Pre-resolved photos (each verified reachable). Loaded directly as <img>, so
 // no CORS issues. Places not listed simply show no photo in the popup.
 export const IMG = {
-  'p-pristina': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Prishtina_seen_from_Mother_Theresa_Cathedral.jpg/960px-Prishtina_seen_from_Mother_Theresa_Cathedral.jpg',
+  'p-pristina': 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Vushtrri%2C_Kosovo.jpg/960px-Vushtrri%2C_Kosovo.jpg',
   'p-lalzit': 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Sunset_in_%22Gjiri_i_Lalzit%22.jpg/960px-Sunset_in_%22Gjiri_i_Lalzit%22.jpg',
   't-vlore': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Promenade_of_Vlor%C3%AB_along_the_Adriatic_Sea.jpg/960px-Promenade_of_Vlor%C3%AB_along_the_Adriatic_Sea.jpg',
   'm-himare': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/ALB_20070718_img_1368.jpg/960px-ALB_20070718_img_1368.jpg',
@@ -220,5 +249,12 @@ export const NAV = [
   { name: 'Himarë supermarket', sub: 'Frozen-goods stop · ~30 min before Borsh', lat: 40.1022, lng: 19.7473 },
   { name: 'Gold Apartment, Sarandë', sub: '24–26 June · Rruga Butrinti', lat: 39.862647, lng: 20.019708 },
   { name: 'Gjiri i Lalzit', sub: '26 June night · sister’s place', lat: 41.4926, lng: 19.5481 },
-  { name: 'Home — Prishtina', sub: '27 June return', lat: 42.6639, lng: 21.1641 },
+  { name: 'Home — Vushtrri', sub: '27 June return', lat: 42.826085, lng: 20.972474 },
 ];
+
+// One-tap full coastal drive down with every stop, in order, ending at the hotel.
+export const BORSH_ROUTE = {
+  label: 'Full drive to Borsh (with stops)',
+  sub: 'NBT → Vlorë → Llogara → Dhërmi → Himarë → Porto Palermo',
+  gmaps: 'https://www.google.com/maps/dir/?api=1&origin=42.826085,20.972474&destination=40.036463,19.866561&travelmode=driving&waypoints=41.860500,20.005537%7C40.4708,19.4913%7C40.1982,19.5924%7C40.1512,19.6414%7C40.1022,19.7473%7C40.0622,19.7907',
+};

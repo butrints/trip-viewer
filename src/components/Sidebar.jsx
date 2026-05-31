@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CATEGORIES, PLACES, LEGS, ITINERARY, DAY_PLAN, NAV, gmapsNavigate, getTripStatus, PLACE_BY_ID } from '../data/trip';
+import { CATEGORIES, PLACES, LEGS, ITINERARY, DAY_PLAN, NAV, BORSH_ROUTE, gmapsNavigate, getTripStatus, PLACE_BY_ID } from '../data/trip';
 
 const placeById = Object.fromEntries(PLACES.map(p => [p.id, p]));
 
@@ -19,6 +19,7 @@ function TodayCard({ onSelect }) {
   const d = s.day;
   const nav = d.navId ? PLACE_BY_ID[d.navId] : null;
   const before = s.status === 'before';
+  const isDriveDown = d.navId === 'p-borsh-hotel'; // arrival day → full coastal route with stops
 
   return (
     <div className="today">
@@ -27,15 +28,20 @@ function TodayCard({ onSelect }) {
         <span className="today-date">{d.day}</span>
       </div>
       <b className="today-title">{d.title}</b>
-      <span className="today-sub">{before ? 'First up: ' : 'Staying: '}{before ? 'drive Prishtina → Borsh' : d.stay}</span>
+      <span className="today-sub">{before ? 'First up: ' : 'Staying: '}{before ? 'drive Vushtrri → Borsh' : d.stay}</span>
       <p className="today-note">{d.note}</p>
       <div className="today-actions">
-        {nav && (
+        {isDriveDown ? (
+          <a className="today-go" target="_blank" rel="noopener" href={BORSH_ROUTE.gmaps}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 6h8a3 3 0 0 1 0 6H8a3 3 0 0 0 0 6h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            Drive to Borsh (with stops)
+          </a>
+        ) : nav ? (
           <a className="today-go" target="_blank" rel="noopener" href={gmapsNavigate(nav.lat, nav.lng)}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8-8-2z" fill="currentColor" /></svg>
             Navigate to {nav.name}
           </a>
-        )}
+        ) : null}
         {d.places && d.places.length > 0 && (
           <div className="chips">
             {d.places.map((pid) => placeById[pid] && (
@@ -92,6 +98,20 @@ export default function Sidebar({ visible, onToggle, selected, onSelect, showRet
               </a>
             ))}
           </div>
+
+          <div className="label">Drive down to Borsh</div>
+          <a className="bignav" target="_blank" rel="noopener" href={BORSH_ROUTE.gmaps} aria-label="Full driving route to Borsh with all stops">
+            <span className="bn-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M8 6h8a3 3 0 0 1 0 6H8a3 3 0 0 0 0 6h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <span className="bn-text">
+              <b>{BORSH_ROUTE.label}</b>
+              <span className="bn-sub">{BORSH_ROUTE.sub}</span>
+            </span>
+            <span className="arrow">›</span>
+          </a>
 
           <div className="label">Itinerary</div>
           {ITINERARY.map((row, i) => (
@@ -152,7 +172,7 @@ export default function Sidebar({ visible, onToggle, selected, onSelect, showRet
           ))}
 
           <div className="label">Route lines</div>
-          <div className="legend"><span className="leg-line solid" /> Drive down (Prishtina → Borsh → Sarandë)</div>
+          <div className="legend"><span className="leg-line solid" /> Drive down (Vushtrri → Borsh → Sarandë)</div>
           <button className={`toggle ${showReturn ? 'on' : ''}`} onClick={onToggleReturn} aria-pressed={showReturn}>
             <span className="leg-line dashed" />
             <span className="tname">Return drives (inland)</span>
